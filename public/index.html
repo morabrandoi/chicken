@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <title>it (a) nug</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: #000;
+            overflow: hidden;
+            position: relative; /* add this to use absolute positioning in child elements */
+        }
+        #nuggetImg {
+            position: absolute; /* this will position the image relative to the body element */
+            width: 40%; /* adjust this to change the size of the nugget */
+            max-width: 250px; /* adjust this to set a maximum size */
+            opacity: 0.10; /* this makes the nugget 95% transparent */
+            pointer-events: none; /* this prevents the image from blocking the button */
+            z-index: -1; /* this places the image behind the button */
+        }
+        #myVideo {
+            display: none;
+            max-width: 100%;
+            max-height: 100%;
+        }
+        #playButton {
+            padding: 10px 20px;
+            font-size: 20px;
+            color: #fff;
+            background: #333;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <img id="nuggetImg" src="nugget.png" alt="Chicken Nugget"> <!-- add this for the nugget image -->
+    <button id="playButton">What is this?</button>
+    <video id="myVideo" controls>
+        <source src="nugget.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <script>
+        var playButton = document.getElementById('playButton');
+        var myVideo = document.getElementById('myVideo');
+        var nuggetImg = document.getElementById('nuggetImg'); /* add this to reference the nugget image */
+
+        playButton.addEventListener('click', function(){
+            playButton.style.display = 'none'; // hide the play button
+            nuggetImg.style.display = 'none'; // hide the nugget image
+            myVideo.style.display = 'block'; // show the video
+            myVideo.play(); // play the video
+        });
+
+        myVideo.addEventListener('ended', function(){
+            playButton.style.display = 'initial'; // show the play button
+            nuggetImg.style.display = 'initial'; // show the nugget image
+            myVideo.style.display = 'none'; // 
+            var url = 'https://en.wikipedia.org/wiki/Chicken_nugget';
+            window.open(url, '_blank');
+            window.close(); // attempt to close the window once the video ends
+        });
+    </script>
+</body>
+</html>
